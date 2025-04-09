@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Algorithm Visualizer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-microchip"></i> CPU Scheduling Algorithm Visualizer</h1>
+            <p class="subtitle">Interactive visualization of different CPU scheduling algorithms</p>
+        </header>
+
+        <main>
+            <div class="control-panel">
+                <div class="algorithm-selector">
+                    <label for="algorithm"><i class="fas fa-code-branch"></i> Select Algorithm:</label>
+                    <select id="algorithm">
+                        <option value="fcfs">First Come First Serve (FCFS)</option>
+                        <option value="round-robin">Round Robin</option>
+                        <option value="sjf-preemptive">Shortest Job First (Preemptive)</option>
+                        <option value="sjf-nonpreemptive">Shortest Job First (Non-Preemptive)</option>
+                        <option value="srtf">Shortest Remaining Time First (SRTF)</option>
+                        <option value="priority">Priority Scheduling</option>
+                    </select>
+                </div>
+
+                <div class="quantum-input" style="display: none;">
+                    <label for="time-quantum"><i class="fas fa-clock"></i> Time Quantum:</label>
+                    <input type="number" id="time-quantum" min="0.1" max="10" step="0.1" value="1">
+                </div>
+
+                <div class="process-input">
+                    <h3><i class="fas fa-list"></i> Process Table</h3>
+                    <div class="table-wrapper">
+                        <table id="process-table">
+                            <thead>
+                                <tr>
+                                    <th>Process</th>
+                                    <th>Arrival Time</th>
+                                    <th>CPU Burst</th>
+                                    <th class="priority-column">Priority</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="table-controls">
+                        <button id="add-process" class="btn primary">
+                            <i class="fas fa-plus"></i> Add Process
+                        </button>
+                        <button id="clear-table" class="btn secondary">
+                            <i class="fas fa-trash"></i> Clear Table
+                        </button>
+                    </div>
+                </div>
+
+                <div class="file-input">
+                    <h3><i class="fas fa-file-import"></i> Load Processes from File</h3>
+                    <div class="file-drop-zone" id="file-drop-zone">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop your file here or click to browse</p>
+                        <input type="file" id="process-file" accept=".txt,.json" hidden>
+                    </div>
+                    <button id="load-file" class="btn primary">
+                        <i class="fas fa-file-import"></i> Load File
+                    </button>
+                </div>
+
+                <div class="simulation-controls">
+                    <button id="start-simulation" class="btn primary pulse">
+                        <i class="fas fa-play"></i> Start Simulation
+                    </button>
+                    <button id="compare-algorithms" class="btn secondary">
+                        <i class="fas fa-chart-bar"></i> Compare Algorithms
+                    </button>
+                </div>
+            </div>
+
+            <div class="visualization-panel">
+                <div class="gantt-chart">
+                    <h3><i class="fas fa-chart-line"></i> Gantt Chart</h3>
+                    <div id="gantt-container"></div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">
+                        <label><i class="fas fa-hourglass-end"></i> Total Time:</label>
+                        <span id="total-time">0</span>
+                    </div>
+                    <div class="metric">
+                        <label><i class="fas fa-clock"></i> Average Waiting Time:</label>
+                        <span id="avg-waiting-time">0.00</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="comparison-modal" class="modal">
+            <div class="modal-content">
+                <span class="close"><i class="fas fa-times"></i></span>
+                <h2><i class="fas fa-chart-bar"></i> Algorithm Comparison</h2>
+                <div id="comparison-chart"></div>
+            </div>
+        </div>
+
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/algorithms.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
